@@ -19,7 +19,8 @@ public class App {
 
         WebDriver driver = new ChromeDriver();
 
-        driver.get("youtube.com");
+        driver.get("https://youtube.com");
+        Thread.sleep(10000);
         driver.close();
     }
 }
