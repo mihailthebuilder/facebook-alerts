@@ -5,6 +5,7 @@ package facebook.alerts;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class App {
 
@@ -13,10 +14,13 @@ public class App {
         System.setProperty("webdriver.chrome.driver",
                 System.getProperty("user.dir") + "/src/main/resources/chromedriver");
 
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("user-data-dir=./src/main/resources/chromeprofile", "profile-directory=Profile 1");
+        WebDriver driver = new ChromeDriver(options);
 
         driver.get("https://facebook.com");
-        Thread.sleep(10000);
+
+        Thread.sleep(5000);
         driver.close();
     }
 }
