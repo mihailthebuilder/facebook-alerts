@@ -16,5 +16,7 @@ Run the project
 - ~~Selenium loads up Chrome~~
 - ~~Selenium uses Chrome custom profile~~
 - ~~Chrome custom profile is logged into Facebook~~
+- Combine facebook & alerts folders
+- Move scraper to separate package
 
 ## Log
