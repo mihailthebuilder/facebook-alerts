@@ -3,24 +3,19 @@
  */
 package facebookalerts;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+
+import facebookalerts.Scraper.Scraper;
 
 public class App {
 
     public static void main(String[] args) throws InterruptedException {
 
-        System.setProperty("webdriver.chrome.driver",
-                System.getProperty("user.dir") + "/src/main/resources/chromedriver");
+        String[] keywords = { "free" };
+        Instant dateTime = Instant.now().minus(1, ChronoUnit.DAYS);
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("user-data-dir=./src/main/resources/chromeprofile", "profile-directory=Profile 1");
-        WebDriver driver = new ChromeDriver(options);
-
-        driver.get("https://facebook.com");
-
-        Thread.sleep(5000);
-        driver.close();
+        Scraper scraper = new Scraper();
+        scraper.getPosts("https://facebook.com", keywords, dateTime);
     }
 }
