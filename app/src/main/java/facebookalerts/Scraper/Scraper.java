@@ -11,7 +11,7 @@ public class Scraper {
 
         WebDriver driver = this.startDriver();
 
-        driver.get("https://facebook.com");
+        driver.get(facebookGroupUrl);
 
         Thread.sleep(5000);
         driver.close();

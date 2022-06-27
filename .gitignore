@@ -9,3 +9,5 @@ app/bin
 gradle-wrapper.jar
 chromedriver
 chromeprofile
+
+db
