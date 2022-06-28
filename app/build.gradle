@@ -24,6 +24,8 @@ dependencies {
     implementation 'com.google.guava:guava:30.1.1-jre'
 
     implementation 'org.seleniumhq.selenium:selenium-java:4.2.2'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
 }
 
 application {
