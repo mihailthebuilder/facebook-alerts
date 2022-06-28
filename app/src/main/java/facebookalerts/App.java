@@ -6,7 +6,7 @@ package facebookalerts;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import facebookalerts.Scraper.Scraper;
+import facebookalerts.scraper.Scraper;
 
 public class App {
 
