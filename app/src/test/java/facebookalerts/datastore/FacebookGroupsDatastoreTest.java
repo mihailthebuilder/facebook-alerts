@@ -20,8 +20,8 @@ public class FacebookGroupsDatastoreTest {
         FacebookGroupRecord record = recordList.get(0);
         assertEquals(record.facebookUrlId(), "581688222758774");
 
-        List<UserRecord> userList = List.of(record.users());
-        assertEquals(userList.size(), 1);
-        assertEquals(userList.get(0).keywords()[0], "free");
+        List<KeywordRecord> keywordList = List.of(record.keywords());
+        assertEquals(keywordList.size(), 1);
+        assertEquals(keywordList.get(0).keyword(), "free");
     }
 }
