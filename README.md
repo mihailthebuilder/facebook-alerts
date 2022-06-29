@@ -20,7 +20,7 @@ Run the project
 - ~~Move scraper to separate package~~
 - Scraper connects to the page you want while keeping URL hidden in repo
   - ~~create local database~~
-  - datastore class connects to local database
+  - ~~datastore class connects to local database~~
   - datastore class gets first page
 - Scraper gets a post text
 - Scraper gets all the posts before date

@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import facebookalerts.records.FacebookGroupRecord;
+import facebookalerts.records.KeywordRecord;
+
 public class FacebookGroupsDatastoreTest {
     @Test
     void testGetAllFacebookGroups() throws FileNotFoundException, ClassNotFoundException, IOException {

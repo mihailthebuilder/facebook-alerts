@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import facebookalerts.records.FacebookGroupRecord;
+
 public class FacebookGroupsDatastore {
 
     String projectPath = System.getProperty("user.dir");

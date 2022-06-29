@@ -3,15 +3,16 @@ package facebookalerts.scraper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import java.time.Instant;
+
+import facebookalerts.datastore.FacebookGroupRecord;
 
 public class Scraper {
-    public void getPosts(String facebookGroupUrl, String[] keywords, Instant dateTimeOfLastScrapedPost)
+    public void getPosts(FacebookGroupRecord facebookGroup)
             throws InterruptedException {
 
         WebDriver driver = this.startDriver();
 
-        driver.get(facebookGroupUrl);
+        driver.get(facebookGroup.facebookUrlId());
 
         Thread.sleep(5000);
         driver.close();
