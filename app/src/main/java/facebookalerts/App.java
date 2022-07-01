@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import facebookalerts.records.FacebookGroupRecord;
 import facebookalerts.datastore.FacebookGroupsDatastore;
@@ -28,7 +29,7 @@ public class App {
         Notifier notifier = new Notifier();
 
         for (FacebookGroupRecord facebookGroup : facebookGroupList) {
-            UserNotificationRecord[] notificationList = scraper.getUserNotifications(facebookGroup, yesterday);
+            List<UserNotificationRecord> notificationList = scraper.getUserNotifications(facebookGroup, yesterday);
 
             for (UserNotificationRecord notification : notificationList) {
                 notifier.sendNotification(notification);

@@ -1,14 +1,21 @@
 package facebookalerts.scraper;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import facebookalerts.datastore.FacebookGroupRecord;
+import facebookalerts.records.FacebookGroupRecord;
+import facebookalerts.records.UserNotificationRecord;
 
 public class Scraper {
-    public void getPosts(FacebookGroupRecord facebookGroup)
+    public List<UserNotificationRecord> getUserNotifications(FacebookGroupRecord facebookGroup, Instant dateTime)
             throws InterruptedException {
+
+        List<UserNotificationRecord> notificationList = new ArrayList<>();
 
         WebDriver driver = this.startDriver();
 
@@ -16,6 +23,8 @@ public class Scraper {
 
         Thread.sleep(5000);
         driver.close();
+
+        return notificationList;
     }
 
     private WebDriver startDriver() {
