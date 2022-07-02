@@ -1,7 +1,9 @@
 package facebookalerts.datastore;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -26,5 +28,12 @@ public class FacebookGroupsDatastoreTest {
         List<KeywordRecord> keywordList = List.of(record.keywords());
         assertEquals(keywordList.size(), 1);
         assertEquals(keywordList.get(0).keyword(), "free");
+    }
+
+    @Test
+    void testGetDbFile() {
+        FacebookGroupsDatastore datastore = new FacebookGroupsDatastore();
+        File dbFile = datastore.getDbFile();
+        assertNotNull(dbFile);
     }
 }

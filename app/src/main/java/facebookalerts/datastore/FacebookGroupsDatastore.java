@@ -10,18 +10,20 @@ import facebookalerts.records.FacebookGroupRecord;
 
 public class FacebookGroupsDatastore {
 
-    String projectPath = System.getProperty("user.dir");
-
-    private String dbLocation = projectPath + "/src/main/resources/db/FacebookGroups.json";
-
     public FacebookGroupRecord[] getAllFacebookGroups()
             throws FileNotFoundException, IOException, ClassNotFoundException {
 
-        File f = new File(dbLocation);
         ObjectMapper objectMapper = new ObjectMapper();
 
-        FacebookGroupRecord[] facebookGroupRecords = objectMapper.readValue(f, FacebookGroupRecord[].class);
+        FacebookGroupRecord[] facebookGroupRecords = objectMapper.readValue(getDbFile(), FacebookGroupRecord[].class);
 
         return facebookGroupRecords;
+    }
+
+    protected File getDbFile() {
+        String dbFilePath = new String(
+                "/home/mmarian/dev/facebook-alerts/app/src/main/resources/db/FacebookGroups.json");
+
+        return new File(dbFilePath);
     }
 }
