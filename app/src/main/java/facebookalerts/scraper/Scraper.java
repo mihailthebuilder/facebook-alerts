@@ -21,7 +21,7 @@ public class Scraper {
 
         driver.get(facebookGroup.facebookUrlId());
 
-        Thread.sleep(5000);
+        Thread.sleep(20000);
         driver.close();
 
         return notificationList;
@@ -33,6 +33,8 @@ public class Scraper {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("user-data-dir=./src/main/resources/chromeprofile", "profile-directory=Profile 1");
+        options.setBinary("/usr/bin/google-chrome-beta");
+
         WebDriver driver = new ChromeDriver(options);
         return driver;
     }

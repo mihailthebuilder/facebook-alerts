@@ -20,11 +20,9 @@ public class ScraperTest {
 
         KeywordRecord keyword = new KeywordRecord("free", new String[] { "test@test.com" });
 
-        String projectPath = System.getProperty("user.dir");
+        String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/FacebookGroupPage.html";
 
-        String htmlLocation = projectPath + "/src/test/resources/FacebookGroupPage.html";
-
-        FacebookGroupRecord group = new FacebookGroupRecord("https://www.nba.com", "yesterday",
+        FacebookGroupRecord group = new FacebookGroupRecord(htmlLocation, "yesterday",
                 new KeywordRecord[] { keyword });
 
         List<UserNotificationRecord> notificationList = scraper.getUserNotifications(group, yesterday);
