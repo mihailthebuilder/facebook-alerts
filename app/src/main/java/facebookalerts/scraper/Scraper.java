@@ -27,7 +27,7 @@ public class Scraper {
         return notificationList;
     }
 
-    private WebDriver startDriver() {
+    protected WebDriver startDriver() {
         System.setProperty("webdriver.chrome.driver",
                 System.getProperty("user.dir") + "/src/main/resources/chromedriver");
 

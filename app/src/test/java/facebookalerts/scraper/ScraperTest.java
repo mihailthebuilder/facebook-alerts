@@ -8,6 +8,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 
 import facebookalerts.records.FacebookGroupRecord;
 import facebookalerts.records.KeywordRecord;
@@ -37,5 +38,12 @@ public class ScraperTest {
         assertEquals(1, notification.posts());
 
         assertTrue(notification.posts()[0].contains("Recently there has been a lot of noise"));
+    }
+
+    @Test
+    void startDriverTest() {
+        Scraper scraper = new Scraper();
+        WebDriver driver = scraper.startDriver();
+        driver.close();
     }
 }
