@@ -3,6 +3,8 @@ package facebookalerts.datastore;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -10,12 +12,13 @@ import facebookalerts.records.FacebookGroupRecord;
 
 public class FacebookGroupsDatastore {
 
-    public FacebookGroupRecord[] getAllFacebookGroups()
+    public List<FacebookGroupRecord> getAllFacebookGroups()
             throws FileNotFoundException, IOException, ClassNotFoundException {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        FacebookGroupRecord[] facebookGroupRecords = objectMapper.readValue(getDbFile(), FacebookGroupRecord[].class);
+        List<FacebookGroupRecord> facebookGroupRecords = Arrays.asList(objectMapper.readValue(getDbFile(),
+                FacebookGroupRecord[].class));
 
         return facebookGroupRecords;
     }

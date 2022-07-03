@@ -10,7 +10,7 @@ import java.io.IOException;
 
 class AppTest {
     @Test
-    void appHasAGreeting() throws FileNotFoundException, ClassNotFoundException, InterruptedException, IOException {
+    void testMain() throws FileNotFoundException, ClassNotFoundException, InterruptedException, IOException {
         String[] args = null;
         App.main(args);
     }

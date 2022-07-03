@@ -18,14 +18,14 @@ public class FacebookGroupsDatastoreTest {
     void testGetAllFacebookGroups() throws FileNotFoundException, ClassNotFoundException, IOException {
         FacebookGroupsDatastore datastore = new FacebookGroupsDatastore();
 
-        List<FacebookGroupRecord> recordList = List.of(datastore.getAllFacebookGroups());
+        List<FacebookGroupRecord> recordList = datastore.getAllFacebookGroups();
 
         assertEquals(recordList.size(), 1);
 
         FacebookGroupRecord record = recordList.get(0);
         assertEquals(record.facebookUrlId(), "581688222758774");
 
-        List<KeywordRecord> keywordList = List.of(record.keywords());
+        List<KeywordRecord> keywordList = record.keywords();
         assertEquals(keywordList.size(), 1);
         assertEquals(keywordList.get(0).keyword(), "free");
     }

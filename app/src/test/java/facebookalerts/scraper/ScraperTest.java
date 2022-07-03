@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -22,12 +23,12 @@ public class ScraperTest {
 
         Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
 
-        KeywordRecord keyword = new KeywordRecord("sentient", new String[] { "test@test.com" });
+        KeywordRecord keyword = new KeywordRecord("sentient", Arrays.asList(new String[] { "test@test.com" }));
 
         String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/FacebookGroupPage.html";
 
         FacebookGroupRecord group = new FacebookGroupRecord(htmlLocation, "yesterday",
-                new KeywordRecord[] { keyword });
+                Arrays.asList(new KeywordRecord[] { keyword }));
 
         List<UserNotificationRecord> notificationList = scraper.getUserNotifications(group, yesterday);
 
@@ -37,7 +38,7 @@ public class ScraperTest {
         assertEquals("test@test.com", notification.emailAddress());
         assertEquals(1, notification.posts());
 
-        assertTrue(notification.posts()[0].contains("Recently there has been a lot of noise"));
+        assertTrue(notification.posts().get(0).contains("Recently there has been a lot of noise"));
     }
 
     @Test

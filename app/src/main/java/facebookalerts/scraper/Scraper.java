@@ -21,7 +21,7 @@ public class Scraper {
 
         driver.get(facebookGroup.facebookUrlId());
 
-        Thread.sleep(20000);
+        Thread.sleep(1000);
         driver.close();
 
         return notificationList;

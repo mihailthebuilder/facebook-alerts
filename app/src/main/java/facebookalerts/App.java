@@ -21,7 +21,7 @@ public class App {
             throws InterruptedException, FileNotFoundException, ClassNotFoundException, IOException {
 
         FacebookGroupsDatastore datastore = new FacebookGroupsDatastore();
-        FacebookGroupRecord[] facebookGroupList = datastore.getAllFacebookGroups();
+        List<FacebookGroupRecord> facebookGroupList = datastore.getAllFacebookGroups();
 
         Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
 
