@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Map;
 
 import facebookalerts.records.FacebookGroupRecord;
 import facebookalerts.datastore.FacebookGroupsDatastore;
 import facebookalerts.notifier.Notifier;
-import facebookalerts.records.UserNotificationRecord;
 import facebookalerts.scraper.Scraper;
 
 public class App {
@@ -29,11 +29,7 @@ public class App {
         Notifier notifier = new Notifier();
 
         for (FacebookGroupRecord facebookGroup : facebookGroupList) {
-            List<UserNotificationRecord> notificationList = scraper.getUserNotifications(facebookGroup, yesterday);
-
-            for (UserNotificationRecord notification : notificationList) {
-                notifier.sendNotification(notification);
-            }
+            Map<String, List<String>> notifications = scraper.getUserNotifications(facebookGroup, yesterday);
         }
     }
 }

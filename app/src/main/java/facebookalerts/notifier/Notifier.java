@@ -1,8 +1,9 @@
 package facebookalerts.notifier;
 
-import facebookalerts.records.UserNotificationRecord;
+import java.util.List;
+import java.util.Map;
 
 public class Notifier {
-    public void sendNotification(UserNotificationRecord userNotification) {
+    public void sendNotification(Map<String, List<String>> userNotification) {
     }
 }
