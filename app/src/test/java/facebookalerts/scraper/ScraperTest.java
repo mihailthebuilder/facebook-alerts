@@ -1,5 +1,8 @@
 package facebookalerts.scraper;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -18,7 +21,7 @@ public class ScraperTest {
 
         Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
 
-        KeywordRecord keyword = new KeywordRecord("free", new String[] { "test@test.com" });
+        KeywordRecord keyword = new KeywordRecord("sentient", new String[] { "test@test.com" });
 
         String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/FacebookGroupPage.html";
 
@@ -26,5 +29,13 @@ public class ScraperTest {
                 new KeywordRecord[] { keyword });
 
         List<UserNotificationRecord> notificationList = scraper.getUserNotifications(group, yesterday);
+
+        assertEquals(1, notificationList.size());
+
+        UserNotificationRecord notification = notificationList.get(0);
+        assertEquals("test@test.com", notification.emailAddress());
+        assertEquals(1, notification.posts());
+
+        assertTrue(notification.posts()[0].contains("Recently there has been a lot of noise"));
     }
 }
