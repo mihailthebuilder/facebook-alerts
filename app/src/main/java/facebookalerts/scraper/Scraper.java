@@ -24,9 +24,9 @@ public class Scraper {
 
         Map<String, List<String>> notifications = new HashMap<String, List<String>>();
 
-        int selectorCounter = 0;
+        int selectorCounter = 1;
         for (List<WebElement> posts = driver.findElements(
-                By.cssSelector(String.format("[data-ad-preview=\"message\"]:nth-of-type(%d)", selectorCounter))); posts
+                By.cssSelector(this.createPostCssSelector(selectorCounter))); posts
                         .size() > 0; selectorCounter++) {
             String postText = posts.get(0).getText();
 
@@ -55,5 +55,9 @@ public class Scraper {
 
         WebDriver driver = new ChromeDriver(options);
         return driver;
+    }
+
+    protected String createPostCssSelector(int postNumber) {
+        return String.format("[data-ad-preview=\"message\"]:nth-of-type(%d)", postNumber);
     }
 }

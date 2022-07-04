@@ -1,13 +1,19 @@
 package facebookalerts.scraper;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -16,7 +22,7 @@ import facebookalerts.records.KeywordRecord;
 
 public class ScraperTest {
     @Test
-    void getUserNotifications() throws InterruptedException {
+    void getUserNotificationsTest() throws InterruptedException {
 
         Scraper scraper = new Scraper();
 
@@ -41,5 +47,20 @@ public class ScraperTest {
         Scraper scraper = new Scraper();
         WebDriver driver = scraper.startDriver();
         driver.close();
+    }
+
+    @Test
+    void testCreatePostCssSelector() throws IOException {
+        Scraper scraper = new Scraper();
+
+        File input = new File("/home/mmarian/dev/facebook-alerts/app/src/test/resources/Post.html");
+
+        Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/");
+
+        String selector = scraper.createPostCssSelector(1);
+
+        Elements results = doc.select(selector);
+
+        assertNotNull(results.first());
     }
 }
