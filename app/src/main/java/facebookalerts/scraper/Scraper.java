@@ -25,10 +25,16 @@ public class Scraper {
         Map<String, List<String>> notifications = new HashMap<String, List<String>>();
 
         int selectorCounter = 1;
-        for (List<WebElement> posts = driver.findElements(
-                By.cssSelector(this.createPostCssSelector(selectorCounter))); posts
-                        .size() > 0; selectorCounter++) {
-            String postText = posts.get(0).getText();
+
+        while (true) {
+            List<WebElement> queryResults = driver.findElements(
+                    By.cssSelector(this.createPostCssSelector(selectorCounter)));
+
+            if (queryResults.size() == 0) {
+                break;
+            }
+
+            String postText = queryResults.get(0).getText();
 
             for (KeywordRecord keyword : facebookGroup.keywords()) {
                 if (postText.contains(keyword.keyword())) {
@@ -37,6 +43,8 @@ public class Scraper {
                     }
                 }
             }
+
+            selectorCounter += 1;
         }
 
         Thread.sleep(1000);

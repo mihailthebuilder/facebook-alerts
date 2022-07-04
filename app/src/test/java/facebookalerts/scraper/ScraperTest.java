@@ -37,7 +37,7 @@ public class ScraperTest {
 
         Map<String, List<String>> notifications = scraper.getUserNotifications(group, yesterday);
 
-        assertTrue(notifications.get("test@test.com").size() > 0);
+        assertNotNull(notifications.get("test@test.com"));
 
         assertTrue(notifications.get("test@test.com").get(0).contains("Recently there has been a lot of noise"));
     }
