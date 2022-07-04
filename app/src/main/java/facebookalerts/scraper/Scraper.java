@@ -30,8 +30,10 @@ public class Scraper {
         int selectorCounter = 1;
 
         while (true) {
-            List<WebElement> queryResults = driver.findElements(
-                    By.cssSelector(this.selector.createPostCssSelector(selectorCounter)));
+
+            String queryString = this.selector.createPostCssSelector(selectorCounter);
+
+            List<WebElement> queryResults = driver.findElements(By.cssSelector(queryString));
 
             if (queryResults.size() == 0) {
                 break;

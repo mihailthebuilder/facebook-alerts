@@ -26,7 +26,7 @@ public class ScraperTest {
 
         KeywordRecord keyword = new KeywordRecord("sentient", Arrays.asList(new String[] { "test@test.com" }));
 
-        String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/FacebookGroupPage.html";
+        String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/GroupPage.html";
 
         FacebookGroupRecord group = new FacebookGroupRecord(htmlLocation, "yesterday",
                 Arrays.asList(new KeywordRecord[] { keyword }));
