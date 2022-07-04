@@ -44,7 +44,7 @@ public class Scraper {
                 }
             }
 
-            selectorCounter += 1;
+            ++selectorCounter;
         }
 
         Thread.sleep(1000);
