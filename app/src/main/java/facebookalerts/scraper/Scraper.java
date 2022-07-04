@@ -15,6 +15,9 @@ import facebookalerts.records.FacebookGroupRecord;
 import facebookalerts.records.KeywordRecord;
 
 public class Scraper {
+
+    private PostCssSelector selector = new PostCssSelector();
+
     public Map<String, List<String>> getUserNotifications(FacebookGroupRecord facebookGroup, Instant dateTime)
             throws InterruptedException {
 
@@ -28,7 +31,7 @@ public class Scraper {
 
         while (true) {
             List<WebElement> queryResults = driver.findElements(
-                    By.cssSelector(this.createPostCssSelector(selectorCounter)));
+                    By.cssSelector(this.selector.createPostCssSelector(selectorCounter)));
 
             if (queryResults.size() == 0) {
                 break;
@@ -63,9 +66,5 @@ public class Scraper {
 
         WebDriver driver = new ChromeDriver(options);
         return driver;
-    }
-
-    protected String createPostCssSelector(int postNumber) {
-        return String.format("[data-ad-preview=\"message\"]:nth-of-type(%d)", postNumber);
     }
 }
