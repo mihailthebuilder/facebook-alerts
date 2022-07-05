@@ -1,5 +1,6 @@
 package facebookalerts.notifier;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +15,26 @@ public class Notifier {
         return this.notifications.get(userEmail);
     }
 
-    protected void addNotificationToUser(String userEmail, List<String> posts) {
-        this.getNotificationsForUser(userEmail).addAll(posts);
+    protected void addNotificationToUser(String userEmail, String post) {
+
+        if (this.notifications.get(userEmail) == null) {
+            this.notifications.put(userEmail, Arrays.asList(post));
+            return;
+        }
+
+        this.notifications.get(userEmail).add(post);
     }
 
     public void processPostsIntoNotifications(List<String> posts, List<KeywordRecord> keywords) {
-
+        for (KeywordRecord keyword : keywords) {
+            for (String post : posts) {
+                if (post.contains(keyword.keyword())) {
+                    for (String email : keyword.subscribedEmailAddresses()) {
+                        this.addNotificationToUser(email, post);
+                    }
+                }
+            }
+        }
     }
 
     public void sendNotifications() {
