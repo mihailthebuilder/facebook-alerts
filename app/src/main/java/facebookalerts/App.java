@@ -30,9 +30,7 @@ public class App {
 
         for (FacebookGroupRecord group : facebookGroups) {
             List<String> posts = scraper.getAllPostsForGroup(group.facebookUrlId(), yesterday);
-            Map<String, List<String>> notifications = notifier.createNotificationsFromPosts(posts,
-                    group.keywords());
-            notifier.addNotificationsForGroup(notifications);
+            notifier.processPostsIntoNotifications(posts, group.keywords());
         }
 
         notifier.sendNotifications();

@@ -12,32 +12,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Scraper {
 
-    // private PostCssSelector selector = new PostCssSelector();
-
-    // public Map<String, List<String>> getUserNotifications(FacebookGroupRecord
-    // facebookGroup, Instant dateTime)
-    // throws InterruptedException {
-
-    // WebDriver driver = this.startDriver();
-
-    // driver.get(facebookGroup.facebookUrlId());
-
-    // Map<String, List<String>> notifications = new HashMap<String,
-    // List<String>>();
-
-    // int selectorCounter = 1;
-
-    // while (true) {
-
-    // String queryString = this.selector.createPostCssSelector(selectorCounter);
-
-    // List<WebElement> queryResults =
-    // driver.findElements(By.cssSelector(queryString));
-
-    // if (queryResults.size() == 0) {
-    // break;
-    // }
-
     // String postText = queryResults.get(0).getText();
 
     // for (KeywordRecord keyword : facebookGroup.keywords()) {
@@ -46,15 +20,6 @@ public class Scraper {
     // notifications.get(email).add(postText);
     // }
     // }
-    // }
-
-    // ++selectorCounter;
-    // }
-
-    // Thread.sleep(1000);
-    // driver.close();
-
-    // return notifications;
     // }
 
     public List<String> getAllPostsForGroup(String groupUrlId, Instant dateTime) throws InterruptedException {

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,7 @@ public class NotifierTest {
     }
 
     @Test
-    void testCreateNotificationsFromPosts() {
+    void testProcessPostsIntoNotifications() {
 
         Notifier notifier = new Notifier();
 
@@ -31,11 +30,14 @@ public class NotifierTest {
                 Arrays.asList(new String[] { "one@one.com", "two@two.com" }));
         List<KeywordRecord> keywords = Arrays.asList(keyword1, keyword2, keyword3);
 
-        Map<String, List<String>> notifications = notifier.createNotificationsFromPosts(posts, keywords);
+        notifier.processPostsIntoNotifications(posts, keywords);
 
-        assertEquals(Arrays.asList("hello world", "how are you this morning"), notifications.get("test@test.com"));
-        assertEquals(Arrays.asList("hello world"), notifications.get("one@one.com"));
-        assertEquals(null, notifications.get("two@two.com"));
+        assertEquals(Arrays.asList("hello world", "how are you this morning"),
+                notifier.getNotificationsForUser("test@test.com"));
+
+        assertEquals(Arrays.asList("hello world"), notifier.getNotificationsForUser("one@one.com"));
+
+        assertEquals(null, notifier.getNotificationsForUser("two@two.com"));
     }
 
     @Test

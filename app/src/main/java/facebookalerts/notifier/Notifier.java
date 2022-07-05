@@ -1,5 +1,6 @@
 package facebookalerts.notifier;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,21 +8,18 @@ import facebookalerts.records.KeywordRecord;
 
 public class Notifier {
 
-    private Map<String, List<String>> notifications;
+    private Map<String, List<String>> notifications = new HashMap<String, List<String>>();
 
-    protected Map<String, List<String>> getNotifications() {
-        return this.notifications;
+    protected List<String> getNotificationsForUser(String userEmail) {
+        return this.notifications.get(userEmail);
     }
 
-    protected void setNotifications(Map<String, List<String>> notifications) {
-        this.notifications = notifications;
+    protected void addNotificationToUser(String userEmail, List<String> posts) {
+        this.getNotificationsForUser(userEmail).addAll(posts);
     }
 
-    public Map<String, List<String>> createNotificationsFromPosts(List<String> posts, List<KeywordRecord> keywords) {
-        return null;
-    }
+    public void processPostsIntoNotifications(List<String> posts, List<KeywordRecord> keywords) {
 
-    public void addNotificationsForGroup(Map<String, List<String>> notifications2) {
     }
 
     public void sendNotifications() {
