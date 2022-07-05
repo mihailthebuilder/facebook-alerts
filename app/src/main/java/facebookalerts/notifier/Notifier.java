@@ -17,6 +17,13 @@ public class Notifier {
         this.notifications = notifications;
     }
 
-    public void addNotificationsForGroup(List<String> posts, List<KeywordRecord> keywords) {
+    public Map<String, List<String>> createNotificationsFromPosts(List<String> posts, List<KeywordRecord> keywords) {
+        return null;
+    }
+
+    public void addNotificationsForGroup(Map<String, List<String>> notifications2) {
+    }
+
+    public void sendNotifications() {
     }
 }
