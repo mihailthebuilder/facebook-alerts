@@ -64,22 +64,11 @@ public class Scraper {
         WebDriver driver = this.startDriver();
         driver.get(groupUrlId);
 
-        int selectorCounter = 1;
+        List<WebElement> queryResults = driver.findElements(By.cssSelector("[data-ad-preview=\"message\"]"));
 
         List<String> posts = new ArrayList<>();
-
-        while (true) {
-
-            String queryString = this.selector.createPostCssSelector(selectorCounter);
-
-            List<WebElement> queryResults = driver.findElements(By.cssSelector(queryString));
-
-            if (queryResults.size() == 0) {
-                break;
-            }
-
-            posts.add(queryResults.get(0).getText());
-            ++selectorCounter;
+        for (WebElement result : queryResults) {
+            posts.add(result.getText());
         }
 
         Thread.sleep(1000);

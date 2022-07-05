@@ -44,12 +44,13 @@ public class ScraperTest {
         Scraper scraper = new Scraper();
 
         Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
-        String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/GroupPage.html";
+        String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/GroupPageOld.html";
 
         List<String> posts = scraper.getAllPostsForGroup(htmlLocation, yesterday);
-        assertEquals(2, posts.size());
-        assertTrue(posts.get(0).contains("This is the Group"));
-        assertEquals(posts.get(1), "Testing testing hello world");
+        assertEquals(15, posts.size());
+
+        assertEquals(posts.get(0).substring(0, 17), "PSA: One thing I ");
+        assertEquals(posts.get(10).substring(0, 14), "My new article");
     }
 
     @Test
