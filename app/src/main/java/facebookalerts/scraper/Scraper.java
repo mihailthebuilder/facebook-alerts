@@ -60,14 +60,32 @@ public class Scraper {
     }
 
     protected List<String> getAllPostsForGroup(String groupUrlId, Instant dateTime) throws InterruptedException {
-        WebDriver driver = this.startDriver();
 
-        List<String> postList = new ArrayList<>();
+        WebDriver driver = this.startDriver();
+        driver.get(groupUrlId);
+
+        int selectorCounter = 1;
+
+        List<String> posts = new ArrayList<>();
+
+        while (true) {
+
+            String queryString = this.selector.createPostCssSelector(selectorCounter);
+
+            List<WebElement> queryResults = driver.findElements(By.cssSelector(queryString));
+
+            if (queryResults.size() == 0) {
+                break;
+            }
+
+            posts.add(queryResults.get(0).getText());
+            ++selectorCounter;
+        }
 
         Thread.sleep(1000);
         driver.close();
 
-        return postList;
+        return posts;
     }
 
     protected WebDriver startDriver() {
