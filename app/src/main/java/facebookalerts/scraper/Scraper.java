@@ -12,16 +12,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Scraper {
 
-    // String postText = queryResults.get(0).getText();
-
-    // for (KeywordRecord keyword : facebookGroup.keywords()) {
-    // if (postText.contains(keyword.keyword())) {
-    // for (String email : keyword.subscribedEmailAddresses()) {
-    // notifications.get(email).add(postText);
-    // }
-    // }
-    // }
-
     public List<String> getAllPostsForGroup(String groupUrlId, Instant dateTime) throws InterruptedException {
 
         WebDriver driver = this.startDriver();

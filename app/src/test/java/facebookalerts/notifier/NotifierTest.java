@@ -10,10 +10,6 @@ import org.junit.jupiter.api.Test;
 import facebookalerts.records.KeywordRecord;
 
 public class NotifierTest {
-    @Test
-    void testAddNotificationsForGroup() {
-
-    }
 
     @Test
     void testProcessPostsIntoNotifications() {
