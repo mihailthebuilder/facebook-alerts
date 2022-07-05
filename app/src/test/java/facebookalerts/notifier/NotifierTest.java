@@ -32,10 +32,11 @@ public class NotifierTest {
 
         notifier.processPostsIntoNotifications(posts, keywords);
 
-        assertEquals(Arrays.asList("hello world", "how are you this morning"),
+        assertEquals(Arrays.asList("hello world", "hello it's a new day", "how are you this morning"),
                 notifier.getNotificationsForUser("test@test.com"));
 
-        assertEquals(Arrays.asList("hello world"), notifier.getNotificationsForUser("one@one.com"));
+        assertEquals(Arrays.asList("hello world", "hello it's a new day"),
+                notifier.getNotificationsForUser("one@one.com"));
 
         assertEquals(null, notifier.getNotificationsForUser("two@two.com"));
     }
