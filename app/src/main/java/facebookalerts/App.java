@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Map;
 
 import facebookalerts.records.FacebookGroupRecord;
 import facebookalerts.datastore.FacebookGroupsDatastore;
