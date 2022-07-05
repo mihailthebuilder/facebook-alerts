@@ -7,10 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import facebookalerts.records.FacebookGroupRecord;
+import facebookalerts.records.KeywordRecord;
 import facebookalerts.datastore.FacebookGroupsDatastore;
 import facebookalerts.notifier.Notifier;
 import facebookalerts.scraper.Scraper;
@@ -21,15 +23,18 @@ public class App {
             throws InterruptedException, FileNotFoundException, ClassNotFoundException, IOException {
 
         FacebookGroupsDatastore datastore = new FacebookGroupsDatastore();
-        List<FacebookGroupRecord> facebookGroupList = datastore.getAllFacebookGroups();
+        List<FacebookGroupRecord> facebookGroups = datastore.getAllFacebookGroups();
 
         Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
 
         Scraper scraper = new Scraper();
         Notifier notifier = new Notifier();
 
-        for (FacebookGroupRecord facebookGroup : facebookGroupList) {
-            Map<String, List<String>> notifications = scraper.getUserNotifications(facebookGroup, yesterday);
+        for (FacebookGroupRecord group : facebookGroups) {
+            List<String> posts = scraper.getAllPostsForGroup(group.facebookUrlId(), yesterday);
+            notifier.addNotificationsForGroup(posts, group.keywords());
         }
+
+        notifier.sendNotifications();
     }
 }
