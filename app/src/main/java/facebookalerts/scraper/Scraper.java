@@ -1,6 +1,7 @@
 package facebookalerts.scraper;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,17 @@ public class Scraper {
         driver.close();
 
         return notifications;
+    }
+
+    protected List<String> getAllPostsForGroup(String groupUrlId, Instant dateTime) throws InterruptedException {
+        WebDriver driver = this.startDriver();
+
+        List<String> postList = new ArrayList<>();
+
+        Thread.sleep(1000);
+        driver.close();
+
+        return postList;
     }
 
     protected WebDriver startDriver() {

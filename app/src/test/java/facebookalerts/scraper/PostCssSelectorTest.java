@@ -16,7 +16,7 @@ public class PostCssSelectorTest {
     private PostCssSelector selector;
 
     public PostCssSelectorTest() throws IOException {
-        File input = new File("/home/mmarian/dev/facebook-alerts/app/src/test/resources/Post.html");
+        File input = new File("/home/mmarian/dev/facebook-alerts/app/src/test/resources/GroupPage.html");
         Document document = Jsoup.parse(input, "UTF-8", "http://example.com/");
         this.document = document;
         this.selector = new PostCssSelector();

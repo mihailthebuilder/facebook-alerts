@@ -1,5 +1,6 @@
 package facebookalerts.scraper;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,6 +37,19 @@ public class ScraperTest {
         assertNotNull(notifications.get("test@test.com"));
 
         assertTrue(notifications.get("test@test.com").get(0).contains("Recently there has been a lot of noise"));
+    }
+
+    @Test
+    void testGetAllPostsForGroup() throws InterruptedException {
+        Scraper scraper = new Scraper();
+
+        Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
+        String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/Post.html";
+
+        List<String> posts = scraper.getAllPostsForGroup(htmlLocation, yesterday);
+        assertEquals(2, posts.size());
+        assertTrue(posts.get(0).contains("This is the Group"));
+        assertEquals(posts.get(1), "Testing testing hello world");
     }
 
     @Test
