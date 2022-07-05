@@ -41,6 +41,16 @@ public class NotifierTest {
     }
 
     @Test
+    void testAddNotificationToUser() {
+        Notifier notifier = new Notifier();
+
+        notifier.addNotificationToUser("test@test.com", "hello world");
+        notifier.addNotificationToUser("test@test.com", "how are you");
+
+        assertEquals(Arrays.asList("hello world", "how are you"), notifier.getNotificationsForUser("test@test.com"));
+    }
+
+    @Test
     void testSendNotifications() {
 
     }
