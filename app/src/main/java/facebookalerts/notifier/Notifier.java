@@ -1,5 +1,6 @@
 package facebookalerts.notifier;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Notifier {
     protected void addNotificationToUser(String userEmail, String post) {
 
         if (this.notifications.get(userEmail) == null) {
-            this.notifications.put(userEmail, Arrays.asList(post));
+            this.notifications.put(userEmail, new ArrayList<String>(Arrays.asList(post)));
             return;
         }
 
