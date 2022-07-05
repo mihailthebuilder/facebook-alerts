@@ -1,7 +1,6 @@
 package facebookalerts.scraper;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,20 +26,21 @@ public class PostCssSelectorTest {
     void selectorFindsFirstPost() throws IOException {
         String query = this.selector.createPostCssSelector(1);
         Elements results = this.document.select(query);
-        assertNotNull(results.first());
+
+        assertEquals(1, results.size());
     }
 
     @Test
     void selectorFindsSecondPost() throws IOException {
         String query = this.selector.createPostCssSelector(2);
         Elements results = this.document.select(query);
-        assertNotNull(results.first());
+        assertEquals(1, results.size());
     }
 
     @Test
     void selectorDoesntFindThirdPost() throws IOException {
         String query = this.selector.createPostCssSelector(3);
         Elements results = this.document.select(query);
-        assertNull(results.first());
+        assertEquals(0, results.size());
     }
 }
