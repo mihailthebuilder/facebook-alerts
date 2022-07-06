@@ -28,7 +28,10 @@ public class App {
         Notifier notifier = new Notifier();
 
         for (FacebookGroupRecord group : facebookGroups) {
-            List<String> posts = scraper.getAllPostsForGroup(group.facebookUrlId(), yesterday);
+
+            String groupSite = String.format("https://www.facebook.com/groups/%s", group.facebookUrlId());
+            List<String> posts = scraper.getAllPostsForGroup(groupSite, yesterday);
+
             notifier.processPostsIntoNotifications(posts, group.keywords());
         }
 

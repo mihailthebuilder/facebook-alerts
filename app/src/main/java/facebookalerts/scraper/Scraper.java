@@ -26,9 +26,9 @@ public class Scraper {
 
     }
 
-    public List<String> getAllPostsForGroup(String groupUrlId, Instant dateTime) throws InterruptedException {
+    public List<String> getAllPostsForGroup(String groupSite, Instant dateTime) throws InterruptedException {
 
-        this.driver.get(groupUrlId);
+        this.driver.get(groupSite);
 
         List<WebElement> queryResults = this.driver.findElements(By.cssSelector("[data-ad-preview=\"message\"]"));
 
