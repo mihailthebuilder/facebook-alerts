@@ -12,25 +12,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Scraper {
 
-    public List<String> getAllPostsForGroup(String groupUrlId, Instant dateTime) throws InterruptedException {
+    private WebDriver driver;
 
-        WebDriver driver = this.startDriver();
-        driver.get(groupUrlId);
-
-        List<WebElement> queryResults = driver.findElements(By.cssSelector("[data-ad-preview=\"message\"]"));
-
-        List<String> posts = new ArrayList<>();
-        for (WebElement result : queryResults) {
-            posts.add(result.getText());
-        }
-
-        Thread.sleep(1000);
-        driver.close();
-
-        return posts;
-    }
-
-    protected WebDriver startDriver() {
+    public Scraper() {
         System.setProperty("webdriver.chrome.driver",
                 System.getProperty("user.dir") + "/src/main/resources/chromedriver");
 
@@ -38,7 +22,26 @@ public class Scraper {
         options.addArguments("user-data-dir=./src/main/resources/chromeprofile", "profile-directory=Profile 1");
         options.setBinary("/usr/bin/google-chrome-beta");
 
-        WebDriver driver = new ChromeDriver(options);
-        return driver;
+        this.driver = new ChromeDriver(options);
+
+    }
+
+    public List<String> getAllPostsForGroup(String groupUrlId, Instant dateTime) throws InterruptedException {
+
+        this.driver.get(groupUrlId);
+
+        List<WebElement> queryResults = this.driver.findElements(By.cssSelector("[data-ad-preview=\"message\"]"));
+
+        List<String> posts = new ArrayList<>();
+        for (WebElement result : queryResults) {
+            posts.add(result.getText());
+        }
+
+        Thread.sleep(1000);
+        return posts;
+    }
+
+    public void close() {
+        this.driver.close();
     }
 }

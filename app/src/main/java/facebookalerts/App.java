@@ -32,6 +32,7 @@ public class App {
             notifier.processPostsIntoNotifications(posts, group.keywords());
         }
 
+        scraper.close();
         notifier.sendNotifications();
     }
 }

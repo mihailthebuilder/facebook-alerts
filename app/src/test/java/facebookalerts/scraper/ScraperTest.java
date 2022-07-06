@@ -7,7 +7,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
 
 public class ScraperTest {
 
@@ -23,12 +22,13 @@ public class ScraperTest {
 
         assertEquals(posts.get(0).substring(0, 17), "PSA: One thing I ");
         assertEquals(posts.get(10).substring(0, 14), "My new article");
+
+        scraper.close();
     }
 
     @Test
-    void startDriverTest() {
+    void testScraperStartAndClose() {
         Scraper scraper = new Scraper();
-        WebDriver driver = scraper.startDriver();
-        driver.close();
+        scraper.close();
     }
 }
