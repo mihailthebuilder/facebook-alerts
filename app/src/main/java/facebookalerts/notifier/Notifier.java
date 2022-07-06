@@ -39,5 +39,6 @@ public class Notifier {
     }
 
     public void sendNotifications() {
+        System.out.println(this.notifications);
     }
 }
