@@ -2,8 +2,6 @@ package facebookalerts.scraper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -15,10 +13,9 @@ public class ScraperTest {
         Scraper scraper = new Scraper();
         scraper.start();
 
-        Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
         String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/GroupPage.html";
 
-        List<String> posts = scraper.getAllPostsForGroup(htmlLocation, yesterday);
+        List<String> posts = scraper.getAllPostsForGroup(htmlLocation);
         assertEquals(15, posts.size());
 
         assertEquals(posts.get(0).substring(0, 17), "PSA: One thing I ");

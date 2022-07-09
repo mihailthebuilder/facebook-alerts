@@ -1,6 +1,5 @@
 package facebookalerts.scraper;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class Scraper {
 
     private WebDriver driver;
 
-    public List<String> getAllPostsForGroup(String groupSite, Instant dateTime) throws InterruptedException {
+    public List<String> getAllPostsForGroup(String groupSite) throws InterruptedException {
 
         this.driver.get(groupSite);
 
@@ -51,9 +50,9 @@ public class Scraper {
     }
 
     protected void loadMoreContentOnPage() throws InterruptedException {
-        for (int counter = 0; counter < 5; counter++) {
+        for (int counter = 0; counter < 10; counter++) {
             this.driver.findElement(By.tagName("body")).sendKeys(Keys.END);
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         }
     }
 }
