@@ -25,7 +25,10 @@ public class Scraper {
 
         List<String> posts = new ArrayList<>();
         for (WebElement result : queryResults) {
-            posts.add(result.getText());
+            String postText = result.getText();
+            if (postText.length() > 3) {
+                posts.add(postText);
+            }
         }
 
         return posts;
