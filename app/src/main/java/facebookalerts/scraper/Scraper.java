@@ -14,9 +14,7 @@ public class Scraper {
 
     private WebDriver driver;
 
-    public List<String> getAllPostsForGroup(String groupSite) throws InterruptedException {
-
-        this.driver.get(groupSite);
+    public List<String> getAllPostsForGroup() throws InterruptedException {
 
         this.loadMoreContentOnPage();
 
@@ -54,5 +52,9 @@ public class Scraper {
             this.driver.findElement(By.tagName("body")).sendKeys(Keys.END);
             Thread.sleep(3000);
         }
+    }
+
+    public void goToGroupSite(String groupUrl) {
+        this.driver.get(groupUrl);
     }
 }

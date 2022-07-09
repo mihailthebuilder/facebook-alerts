@@ -21,8 +21,10 @@ public class Bootstrapper {
 
         for (FacebookGroupRecord group : facebookGroups) {
 
-            String groupSite = String.format("https://www.facebook.com/groups/%s", group.facebookUrlId());
-            List<String> posts = this.scraper.getAllPostsForGroup(groupSite);
+            String groupUrl = String.format("https://www.facebook.com/groups/%s", group.facebookUrlId());
+            this.scraper.goToGroupSite(groupUrl);
+
+            List<String> posts = this.scraper.getAllPostsForGroup();
 
             this.notifier.findRelevantPostsAndAddToNotificationsQueue(posts, group.keywords());
         }

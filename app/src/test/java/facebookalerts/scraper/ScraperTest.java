@@ -14,8 +14,9 @@ public class ScraperTest {
         scraper.start();
 
         String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/GroupPage.html";
+        scraper.goToGroupSite(htmlLocation);
 
-        List<String> posts = scraper.getAllPostsForGroup(htmlLocation);
+        List<String> posts = scraper.getAllPostsForGroup();
         assertEquals(15, posts.size());
 
         assertEquals(posts.get(0).substring(0, 17), "PSA: One thing I ");
