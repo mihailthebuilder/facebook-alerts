@@ -5,39 +5,13 @@ package facebookalerts;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-
-import facebookalerts.records.FacebookGroupRecord;
-import facebookalerts.datastore.FacebookGroupsDatastore;
-import facebookalerts.notifier.Notifier;
-import facebookalerts.scraper.Scraper;
+import facebookalerts.bootstrapper.Bootstrapper;
 
 public class App {
 
     public static void main(String[] args)
-            throws InterruptedException, FileNotFoundException, ClassNotFoundException, IOException {
-
-        FacebookGroupsDatastore datastore = new FacebookGroupsDatastore();
-        List<FacebookGroupRecord> facebookGroups = datastore.getAllFacebookGroups();
-
-        Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
-
-        Scraper scraper = new Scraper();
-        scraper.start();
-
-        Notifier notifier = new Notifier();
-
-        for (FacebookGroupRecord group : facebookGroups) {
-
-            String groupSite = String.format("https://www.facebook.com/groups/%s", group.facebookUrlId());
-            List<String> posts = scraper.getAllPostsForGroup(groupSite, yesterday);
-
-            notifier.findRelevantPostsAndAddToNotificationsQueue(posts, group.keywords());
-        }
-
-        scraper.close();
-        notifier.sendNotifications();
+            throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException {
+        Bootstrapper bootstrapper = new Bootstrapper();
+        bootstrapper.run();
     }
 }

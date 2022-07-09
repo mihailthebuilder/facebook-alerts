@@ -12,7 +12,7 @@ public class Notifier {
 
     private Map<String, List<String>> notifications = new HashMap<String, List<String>>();
 
-    protected List<String> getNotificationsForUser(String userEmail) {
+    public List<String> getNotificationsForUser(String userEmail) {
         return this.notifications.get(userEmail);
     }
 
