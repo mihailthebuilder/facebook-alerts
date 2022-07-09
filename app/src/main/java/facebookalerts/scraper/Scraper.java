@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,6 +19,8 @@ public class Scraper {
 
         this.driver.get(groupSite);
 
+        this.loadMoreContentOnPage();
+
         List<WebElement> queryResults = this.driver.findElements(By.cssSelector("[data-ad-preview=\"message\"]"));
 
         List<String> posts = new ArrayList<>();
@@ -25,7 +28,6 @@ public class Scraper {
             posts.add(result.getText());
         }
 
-        Thread.sleep(1000);
         return posts;
     }
 
@@ -43,5 +45,12 @@ public class Scraper {
 
     public void close() {
         this.driver.close();
+    }
+
+    protected void loadMoreContentOnPage() throws InterruptedException {
+        for (int counter = 0; counter < 5; counter++) {
+            this.driver.findElement(By.tagName("body")).sendKeys(Keys.END);
+            Thread.sleep(2000);
+        }
     }
 }
