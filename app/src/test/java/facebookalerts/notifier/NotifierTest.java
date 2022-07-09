@@ -11,44 +11,45 @@ import facebookalerts.records.KeywordRecord;
 
 public class NotifierTest {
 
-    @Test
-    void testProcessPostsIntoNotifications() {
+        @Test
+        void testFindNotificationsAndAddToQueues() {
 
-        Notifier notifier = new Notifier();
+                Notifier notifier = new Notifier();
 
-        List<String> posts = Arrays.asList("hello world", "how are you this morning", "hello it's a new day");
+                List<String> posts = Arrays.asList("hello world", "how are you this morning", "hello it's a new day");
 
-        KeywordRecord keyword1 = new KeywordRecord("hello",
-                Arrays.asList(new String[] { "test@test.com", "one@one.com" }));
-        KeywordRecord keyword2 = new KeywordRecord("how",
-                Arrays.asList(new String[] { "test@test.com" }));
-        KeywordRecord keyword3 = new KeywordRecord("nothing",
-                Arrays.asList(new String[] { "one@one.com", "two@two.com" }));
-        List<KeywordRecord> keywords = Arrays.asList(keyword1, keyword2, keyword3);
+                KeywordRecord keyword1 = new KeywordRecord("hello",
+                                Arrays.asList(new String[] { "test@test.com", "one@one.com" }));
+                KeywordRecord keyword2 = new KeywordRecord("how",
+                                Arrays.asList(new String[] { "test@test.com" }));
+                KeywordRecord keyword3 = new KeywordRecord("nothing",
+                                Arrays.asList(new String[] { "one@one.com", "two@two.com" }));
+                List<KeywordRecord> keywords = Arrays.asList(keyword1, keyword2, keyword3);
 
-        notifier.processPostsIntoNotifications(posts, keywords);
+                notifier.findRelevantPostsAndAddToNotificationsQueue(posts, keywords);
 
-        assertEquals(Arrays.asList("hello world", "hello it's a new day", "how are you this morning"),
-                notifier.getNotificationsForUser("test@test.com"));
+                assertEquals(Arrays.asList("hello world", "hello it's a new day", "how are you this morning"),
+                                notifier.getNotificationsForUser("test@test.com"));
 
-        assertEquals(Arrays.asList("hello world", "hello it's a new day"),
-                notifier.getNotificationsForUser("one@one.com"));
+                assertEquals(Arrays.asList("hello world", "hello it's a new day"),
+                                notifier.getNotificationsForUser("one@one.com"));
 
-        assertEquals(null, notifier.getNotificationsForUser("two@two.com"));
-    }
+                assertEquals(null, notifier.getNotificationsForUser("two@two.com"));
+        }
 
-    @Test
-    void testAddNotificationToUser() {
-        Notifier notifier = new Notifier();
+        @Test
+        void testAddNotificationToUser() {
+                Notifier notifier = new Notifier();
 
-        notifier.addNotificationToUser("test@test.com", "hello world");
-        notifier.addNotificationToUser("test@test.com", "how are you");
+                notifier.addNotificationToUser("test@test.com", "hello world");
+                notifier.addNotificationToUser("test@test.com", "how are you");
 
-        assertEquals(Arrays.asList("hello world", "how are you"), notifier.getNotificationsForUser("test@test.com"));
-    }
+                assertEquals(Arrays.asList("hello world", "how are you"),
+                                notifier.getNotificationsForUser("test@test.com"));
+        }
 
-    @Test
-    void testSendNotifications() {
+        @Test
+        void testSendNotifications() {
 
-    }
+        }
 }

@@ -34,7 +34,7 @@ public class App {
             String groupSite = String.format("https://www.facebook.com/groups/%s", group.facebookUrlId());
             List<String> posts = scraper.getAllPostsForGroup(groupSite, yesterday);
 
-            notifier.processPostsIntoNotifications(posts, group.keywords());
+            notifier.findRelevantPostsAndAddToNotificationsQueue(posts, group.keywords());
         }
 
         scraper.close();

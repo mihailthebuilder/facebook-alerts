@@ -26,7 +26,7 @@ public class Notifier {
         this.notifications.get(userEmail).add(post);
     }
 
-    public void processPostsIntoNotifications(List<String> posts, List<KeywordRecord> keywords) {
+    public void findRelevantPostsAndAddToNotificationsQueue(List<String> posts, List<KeywordRecord> keywords) {
         for (KeywordRecord keyword : keywords) {
             for (String post : posts) {
                 if (post.contains(keyword.keyword())) {
