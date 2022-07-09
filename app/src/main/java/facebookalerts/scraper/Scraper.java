@@ -31,10 +31,11 @@ public class Scraper {
 
     public void start() {
         System.setProperty("webdriver.chrome.driver",
-                System.getProperty("user.dir") + "/src/main/resources/chromedriver");
+                "/home/mmarian/dev/facebook-alerts/app/src/main/resources/chromedriver");
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("user-data-dir=./src/main/resources/chromeprofile", "profile-directory=Profile 1");
+        options.addArguments("user-data-dir=/home/mmarian/dev/facebook-alerts/app/src/main/resources/chromeprofile",
+                "profile-directory=Profile 1");
         options.setBinary("/usr/bin/google-chrome-beta");
 
         this.driver = new ChromeDriver(options);
