@@ -16,19 +16,30 @@ public class Scraper {
 
     public List<String> getAllPostsForGroup() throws InterruptedException {
 
-        this.loadMoreContentOnPage();
+        // it's very hard to load Facebook posts in succession with Selenium as...
+        // 1. not all posts are shown when going to the page, you have to scroll down
+        // 2. once you scroll down, the posts at the top won't be visible
 
-        List<WebElement> queryResults = this.driver.findElements(By.cssSelector("[data-ad-preview=\"message\"]"));
+        List<String> allGroupPosts = new ArrayList<String>();
 
-        List<String> posts = new ArrayList<>();
-        for (WebElement result : queryResults) {
-            String postText = result.getText();
-            if (postText.length() > 3) {
-                posts.add(postText);
+        for (int counter = 0; counter < 10; counter++) {
+            waitForContentToLoad();
+
+            List<WebElement> webElementPostsFromCurrentView = this.driver
+                    .findElements(By.cssSelector("[data-ad-preview=\"message\"]"));
+
+            for (WebElement webElementPost : webElementPostsFromCurrentView) {
+                String postText = webElementPost.getText();
+
+                if (postText.length() > 3 && !allGroupPosts.contains(postText)) {
+                    allGroupPosts.add(postText);
+                }
             }
+
+            goToBottomOfPage();
         }
 
-        return posts;
+        return allGroupPosts;
     }
 
     public void start() {
@@ -56,5 +67,13 @@ public class Scraper {
 
     public void goToGroupSite(String groupUrl) {
         this.driver.get(groupUrl);
+    }
+
+    protected void waitForContentToLoad() throws InterruptedException {
+        Thread.sleep(3000);
+    }
+
+    protected void goToBottomOfPage() {
+        this.driver.findElement(By.tagName("body")).sendKeys(Keys.END);
     }
 }

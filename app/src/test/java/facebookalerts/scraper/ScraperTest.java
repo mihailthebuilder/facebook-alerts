@@ -17,12 +17,13 @@ public class ScraperTest {
         scraper.goToGroupSite(htmlLocation);
 
         List<String> posts = scraper.getAllPostsForGroup();
+        scraper.close();
+
         assertEquals(15, posts.size());
 
         assertEquals(posts.get(0).substring(0, 17), "PSA: One thing I ");
         assertEquals(posts.get(10).substring(0, 14), "My new article");
 
-        scraper.close();
     }
 
     @Test

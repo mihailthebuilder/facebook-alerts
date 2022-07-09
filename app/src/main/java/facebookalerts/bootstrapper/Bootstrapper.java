@@ -26,7 +26,8 @@ public class Bootstrapper {
 
             List<String> posts = this.scraper.getAllPostsForGroup();
 
-            this.notifier.findRelevantPostsAndAddToNotificationsQueue(posts, group.keywords());
+            this.notifier.findRelevantPostsAndAddToNotificationsQueue(posts,
+                    group.keywords());
         }
 
         this.scraper.close();
