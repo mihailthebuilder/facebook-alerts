@@ -58,13 +58,6 @@ public class Scraper {
         this.driver.close();
     }
 
-    protected void loadMoreContentOnPage() throws InterruptedException {
-        for (int counter = 0; counter < 10; counter++) {
-            this.driver.findElement(By.tagName("body")).sendKeys(Keys.END);
-            Thread.sleep(3000);
-        }
-    }
-
     public void goToGroupSite(String groupUrl) {
         this.driver.get(groupUrl);
     }
