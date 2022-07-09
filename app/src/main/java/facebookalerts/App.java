@@ -25,6 +25,8 @@ public class App {
         Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
 
         Scraper scraper = new Scraper();
+        scraper.start();
+
         Notifier notifier = new Notifier();
 
         for (FacebookGroupRecord group : facebookGroups) {

@@ -14,18 +14,6 @@ public class Scraper {
 
     private WebDriver driver;
 
-    public Scraper() {
-        System.setProperty("webdriver.chrome.driver",
-                System.getProperty("user.dir") + "/src/main/resources/chromedriver");
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("user-data-dir=./src/main/resources/chromeprofile", "profile-directory=Profile 1");
-        options.setBinary("/usr/bin/google-chrome-beta");
-
-        this.driver = new ChromeDriver(options);
-
-    }
-
     public List<String> getAllPostsForGroup(String groupSite, Instant dateTime) throws InterruptedException {
 
         this.driver.get(groupSite);
@@ -39,6 +27,17 @@ public class Scraper {
 
         Thread.sleep(1000);
         return posts;
+    }
+
+    public void start() {
+        System.setProperty("webdriver.chrome.driver",
+                System.getProperty("user.dir") + "/src/main/resources/chromedriver");
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("user-data-dir=./src/main/resources/chromeprofile", "profile-directory=Profile 1");
+        options.setBinary("/usr/bin/google-chrome-beta");
+
+        this.driver = new ChromeDriver(options);
     }
 
     public void close() {

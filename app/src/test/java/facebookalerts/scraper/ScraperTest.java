@@ -13,6 +13,7 @@ public class ScraperTest {
     @Test
     void testGetAllPostsForGroup() throws InterruptedException {
         Scraper scraper = new Scraper();
+        scraper.start();
 
         Instant yesterday = Instant.now().minus(1, ChronoUnit.DAYS);
         String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/GroupPage.html";
@@ -29,6 +30,7 @@ public class ScraperTest {
     @Test
     void testScraperStartAndClose() {
         Scraper scraper = new Scraper();
+        scraper.start();
         scraper.close();
     }
 }
