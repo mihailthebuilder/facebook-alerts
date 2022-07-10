@@ -1,5 +1,6 @@
 package facebookalerts.browserdriver;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 
 public class BrowserDriver {
 
@@ -24,6 +26,7 @@ public class BrowserDriver {
         options.setBinary("/usr/bin/google-chrome-beta");
 
         this.driver = new ChromeDriver(options);
+        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     public void close() {
@@ -49,6 +52,14 @@ public class BrowserDriver {
         }
 
         return textList;
+    }
 
+    public WebElement findElementByCssSelector(String selector) {
+        return this.driver.findElement(By.cssSelector(selector));
+    }
+
+    public void sendKeys(String keys) {
+        Actions actions = new Actions(this.driver);
+        actions.sendKeys(keys);
     }
 }

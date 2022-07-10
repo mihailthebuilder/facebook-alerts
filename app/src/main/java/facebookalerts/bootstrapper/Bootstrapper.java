@@ -33,7 +33,7 @@ public class Bootstrapper {
                     group.keywords());
         }
 
-        this.browserDriver.close();
         notifier.sendNotifications();
+        this.browserDriver.close();
     }
 }

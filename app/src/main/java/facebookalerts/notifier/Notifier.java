@@ -45,7 +45,19 @@ public class Notifier {
     }
 
     public void sendNotifications() {
-        this.browserDriver.goToWebsite("https://www.facebook.com");
+        this.browserDriver.goToWebsite("https://www.messenger.com");
+
+        for (String user : this.notifications.keySet()) {
+            this.browserDriver.findElementByCssSelector("[aria-label=\"Search Messenger\"]").sendKeys(user);
+            this.browserDriver.findElementByCssSelector("li[role=\"option\"]:nth-of-type(2)").click();
+
+            List<String> posts = this.notifications.get(user);
+            for (String post : posts) {
+                this.browserDriver.findElementByCssSelector("[aria-label=\"Message\"]").sendKeys(post);
+            }
+            this.browserDriver.findElementByCssSelector("[aria-label=\"Press enter to send\"]").click();
+        }
+
         System.out.println(this.notifications);
     }
 }
