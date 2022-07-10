@@ -5,14 +5,17 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+
+import facebookalerts.browserdriver.BrowserDriver;
 
 public class Scraper {
 
-    private WebDriver driver;
+    private BrowserDriver browserDriver;
+
+    public Scraper(BrowserDriver driver) {
+        this.browserDriver = driver;
+    }
 
     public List<String> getAllPostsForGroup() throws InterruptedException {
 
@@ -25,7 +28,7 @@ public class Scraper {
         for (int counter = 0; counter < 10; counter++) {
             waitForContentToLoad();
 
-            List<WebElement> webElementPostsFromCurrentView = this.driver
+            List<WebElement> webElementPostsFromCurrentView = this.browserDriver.get()
                     .findElements(By.cssSelector("[data-ad-preview=\"message\"]"));
 
             for (WebElement webElementPost : webElementPostsFromCurrentView) {
@@ -42,24 +45,8 @@ public class Scraper {
         return allGroupPosts;
     }
 
-    public void start() {
-        System.setProperty("webdriver.chrome.driver",
-                "/home/mmarian/dev/facebook-alerts/app/src/main/resources/chromedriver");
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("user-data-dir=/home/mmarian/dev/facebook-alerts/app/src/main/resources/chromeprofile",
-                "profile-directory=Profile 1");
-        options.setBinary("/usr/bin/google-chrome-beta");
-
-        this.driver = new ChromeDriver(options);
-    }
-
-    public void close() {
-        this.driver.close();
-    }
-
     public void goToGroupSite(String groupUrl) {
-        this.driver.get(groupUrl);
+        this.browserDriver.get().get(groupUrl);
     }
 
     protected void waitForContentToLoad() throws InterruptedException {
@@ -67,6 +54,6 @@ public class Scraper {
     }
 
     protected void goToBottomOfPage() {
-        this.driver.findElement(By.tagName("body")).sendKeys(Keys.END);
+        this.browserDriver.get().findElement(By.tagName("body")).sendKeys(Keys.END);
     }
 }
