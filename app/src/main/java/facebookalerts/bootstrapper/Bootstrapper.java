@@ -25,7 +25,7 @@ public class Bootstrapper {
         for (FacebookGroupRecord group : facebookGroups) {
 
             String groupUrl = String.format("https://www.facebook.com/groups/%s", group.facebookUrlId());
-            scraper.goToGroupSite(groupUrl);
+            browserDriver.goToWebsite(groupUrl);
 
             List<String> posts = scraper.getAllPostsForGroup();
 

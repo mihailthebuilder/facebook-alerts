@@ -18,7 +18,7 @@ public class ScraperTest {
         Scraper scraper = new Scraper(driver);
 
         String htmlLocation = "file:///home/mmarian/dev/facebook-alerts/app/src/test/resources/GroupPage.html";
-        scraper.goToGroupSite(htmlLocation);
+        driver.goToWebsite(htmlLocation);
 
         List<String> posts = scraper.getAllPostsForGroup();
         driver.close();

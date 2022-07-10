@@ -3,10 +3,6 @@ package facebookalerts.scraper;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-
 import facebookalerts.browserdriver.BrowserDriver;
 
 public class Scraper {
@@ -28,32 +24,22 @@ public class Scraper {
         for (int counter = 0; counter < 10; counter++) {
             waitForContentToLoad();
 
-            List<WebElement> webElementPostsFromCurrentView = this.browserDriver.get()
-                    .findElements(By.cssSelector("[data-ad-preview=\"message\"]"));
+            List<String> postsFromCurrentView = this.browserDriver
+                    .getAllElementsAsTextByCssSelector("[data-ad-preview=\"message\"]");
 
-            for (WebElement webElementPost : webElementPostsFromCurrentView) {
-                String postText = webElementPost.getText();
-
-                if (postText.length() > 3 && !allGroupPosts.contains(postText)) {
-                    allGroupPosts.add(postText);
+            for (String post : postsFromCurrentView) {
+                if (post.length() > 3 && !allGroupPosts.contains(post)) {
+                    allGroupPosts.add(post);
                 }
             }
 
-            goToBottomOfPage();
+            this.browserDriver.goToBottomOfPage();
         }
 
         return allGroupPosts;
     }
 
-    public void goToGroupSite(String groupUrl) {
-        this.browserDriver.get().get(groupUrl);
-    }
-
-    protected void waitForContentToLoad() throws InterruptedException {
+    private void waitForContentToLoad() throws InterruptedException {
         Thread.sleep(3000);
-    }
-
-    protected void goToBottomOfPage() {
-        this.browserDriver.get().findElement(By.tagName("body")).sendKeys(Keys.END);
     }
 }
