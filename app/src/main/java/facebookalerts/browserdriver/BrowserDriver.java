@@ -42,7 +42,7 @@ public class BrowserDriver {
         List<String> textList = new ArrayList<String>();
 
         List<WebElement> webElements = this.driver
-                .findElements(By.cssSelector("[data-ad-preview=\"message\"]"));
+                .findElements(By.cssSelector(selector));
 
         for (WebElement element : webElements) {
             textList.add(element.getText());
