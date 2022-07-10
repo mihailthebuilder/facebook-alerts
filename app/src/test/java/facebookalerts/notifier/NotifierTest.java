@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import facebookalerts.browserdriver.BrowserDriver;
 import facebookalerts.records.KeywordRecord;
 
 public class NotifierTest {
@@ -14,7 +15,7 @@ public class NotifierTest {
         @Test
         void testFindNotificationsAndAddToQueues() {
 
-                Notifier notifier = new Notifier();
+                Notifier notifier = new Notifier(new BrowserDriver());
 
                 List<String> posts = Arrays.asList("hello world", "how are you this morning", "hello it's a new day");
 
@@ -39,7 +40,7 @@ public class NotifierTest {
 
         @Test
         void testAddNotificationToUser() {
-                Notifier notifier = new Notifier();
+                Notifier notifier = new Notifier(new BrowserDriver());
 
                 notifier.addNotificationToUser("test@test.com", "hello world");
                 notifier.addNotificationToUser("test@test.com", "how are you");

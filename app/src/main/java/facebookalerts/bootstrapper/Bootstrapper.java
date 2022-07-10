@@ -13,7 +13,6 @@ import facebookalerts.scraper.Scraper;
 public class Bootstrapper {
     protected BrowserDriver browserDriver = new BrowserDriver();
     protected FacebookGroupsDatastore datastore = new FacebookGroupsDatastore();
-    protected Notifier notifier = new Notifier();
 
     public void run() throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException {
         List<FacebookGroupRecord> facebookGroups = this.datastore.getAllFacebookGroups();
@@ -21,6 +20,7 @@ public class Bootstrapper {
         this.browserDriver.start();
 
         Scraper scraper = new Scraper(this.browserDriver);
+        Notifier notifier = new Notifier(this.browserDriver);
 
         for (FacebookGroupRecord group : facebookGroups) {
 
@@ -29,11 +29,11 @@ public class Bootstrapper {
 
             List<String> posts = scraper.getAllPostsForGroup();
 
-            this.notifier.findRelevantPostsAndAddToNotificationsQueue(posts,
+            notifier.findRelevantPostsAndAddToNotificationsQueue(posts,
                     group.keywords());
         }
 
         this.browserDriver.close();
-        this.notifier.sendNotifications();
+        notifier.sendNotifications();
     }
 }

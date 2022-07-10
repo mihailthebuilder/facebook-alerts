@@ -6,11 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import facebookalerts.browserdriver.BrowserDriver;
 import facebookalerts.records.KeywordRecord;
 
 public class Notifier {
 
     private Map<String, List<String>> notifications = new HashMap<String, List<String>>();
+    private BrowserDriver browserDriver;
+
+    public Notifier(BrowserDriver driver) {
+        this.browserDriver = driver;
+    }
 
     public List<String> getNotificationsForUser(String userEmail) {
         return this.notifications.get(userEmail);
@@ -39,6 +45,7 @@ public class Notifier {
     }
 
     public void sendNotifications() {
+        this.browserDriver.goToWebsite("https://www.facebook.com");
         System.out.println(this.notifications);
     }
 }
