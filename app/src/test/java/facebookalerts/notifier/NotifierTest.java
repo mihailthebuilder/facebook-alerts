@@ -1,56 +1,37 @@
 package facebookalerts.notifier;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Arrays;
-import java.util.List;
-
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import facebookalerts.browserdriver.BrowserDriver;
-import facebookalerts.records.KeywordRecord;
+import facebookalerts.notificationsqueue.NotificationsQueue;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class NotifierTest {
 
-        @Test
-        void testFindNotificationsAndAddToQueues() {
+        private BrowserDriver driver;
 
-                Notifier notifier = new Notifier(new BrowserDriver());
+        @BeforeAll
+        public void setup() {
+                this.driver = new BrowserDriver();
+                this.driver.start();
+        }
 
-                List<String> posts = Arrays.asList("hello world", "how are you this morning", "hello it's a new day");
-
-                KeywordRecord keyword1 = new KeywordRecord("hello",
-                                Arrays.asList(new String[] { "test@test.com", "one@one.com" }));
-                KeywordRecord keyword2 = new KeywordRecord("how",
-                                Arrays.asList(new String[] { "test@test.com" }));
-                KeywordRecord keyword3 = new KeywordRecord("nothing",
-                                Arrays.asList(new String[] { "one@one.com", "two@two.com" }));
-                List<KeywordRecord> keywords = Arrays.asList(keyword1, keyword2, keyword3);
-
-                notifier.findRelevantPostsAndAddToNotificationsQueue(posts, keywords);
-
-                assertEquals(Arrays.asList("hello world", "hello it's a new day", "how are you this morning"),
-                                notifier.getNotificationsForUser("test@test.com"));
-
-                assertEquals(Arrays.asList("hello world", "hello it's a new day"),
-                                notifier.getNotificationsForUser("one@one.com"));
-
-                assertEquals(null, notifier.getNotificationsForUser("two@two.com"));
+        @AfterAll
+        public void teardown() {
+                this.driver.close();
         }
 
         @Test
-        void testAddNotificationToUser() {
-                Notifier notifier = new Notifier(new BrowserDriver());
+        public void testSendNotifications() {
+                NotificationsQueue queue = new NotificationsQueue();
+                queue.addNotificationToUser("Mihail Marian", "hello world");
+                queue.addNotificationToUser("Mihail Marian", "how are you");
 
-                notifier.addNotificationToUser("test@test.com", "hello world");
-                notifier.addNotificationToUser("test@test.com", "how are you");
-
-                assertEquals(Arrays.asList("hello world", "how are you"),
-                                notifier.getNotificationsForUser("test@test.com"));
-        }
-
-        @Test
-        void testSendNotifications() {
-
+                Notifier notifier = new Notifier(this.driver, queue);
+                notifier.sendNotifications();
+                driver.close();
         }
 }
