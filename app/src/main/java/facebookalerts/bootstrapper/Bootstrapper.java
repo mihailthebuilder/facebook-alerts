@@ -30,12 +30,12 @@ public class Bootstrapper {
 
             List<String> posts = scraper.getAllPostsForGroup();
 
-            queue.findRelevantPostsAndAddToNotificationsQueue(posts,
+            this.queue.findRelevantPostsAndAddToNotificationsQueue(posts,
                     group.keywords());
         }
 
-        // Notifier notifier = new Notifier(this.browserDriver);
-        // notifier.sendNotifications();
+        Notifier notifier = new Notifier(this.browserDriver, this.queue);
+        notifier.sendNotifications();
         this.browserDriver.close();
     }
 }
