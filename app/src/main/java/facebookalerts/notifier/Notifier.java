@@ -26,13 +26,12 @@ public class Notifier {
             this.browserDriver.findElementByCssSelector("[aria-label=\"Search Messenger\"]").sendKeys(user);
             this.browserDriver.findElementByCssSelector("li[role=\"option\"]:nth-of-type(2)").click();
 
-            List<String> posts = this.queue.getNotificationsForUser(user);
-
             this.browserDriver.findElementByCssSelector("[aria-label=\"Message\"]").click();
 
-            for (String post : posts) {
-                this.browserDriver.findElementByCssSelector("[aria-label=\"Message\"]").sendKeys(post);
-            }
+            List<String> posts = this.queue.getNotificationsForUser(user);
+            String message = String.join(" | ", posts);
+            this.browserDriver.findElementByCssSelector("[aria-label=\"Message\"]").sendKeys(message);
+
             this.browserDriver.findElementByCssSelector("[aria-label=\"Press enter to send\"]").click();
         }
 

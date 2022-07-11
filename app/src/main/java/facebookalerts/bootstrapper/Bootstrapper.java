@@ -34,8 +34,8 @@ public class Bootstrapper {
                     group.keywords());
         }
 
-        Notifier notifier = new Notifier(this.browserDriver);
-        notifier.sendNotifications();
+        // Notifier notifier = new Notifier(this.browserDriver);
+        // notifier.sendNotifications();
         this.browserDriver.close();
     }
 }
