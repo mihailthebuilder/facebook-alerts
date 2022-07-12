@@ -6,12 +6,26 @@ package facebookalerts;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import facebookalerts.bootstrapper.Bootstrapper;
+import facebookalerts.browserdriver.BrowserDriver;
+import facebookalerts.datastore.FacebookGroupsDatastore;
+import facebookalerts.notifier.Notifier;
+import facebookalerts.scraper.Scraper;
 
 public class App {
 
     public static void main(String[] args)
             throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException {
-        Bootstrapper bootstrapper = new Bootstrapper();
+
+        FacebookGroupsDatastore datastore = new FacebookGroupsDatastore();
+        BrowserDriver driver = new BrowserDriver();
+        driver.start();
+
+        Scraper scraper = new Scraper(driver);
+        Notifier notifier = new Notifier(driver);
+
+        Bootstrapper bootstrapper = new Bootstrapper(scraper, datastore, notifier, driver);
         bootstrapper.run();
+
+        driver.close();
     }
 }

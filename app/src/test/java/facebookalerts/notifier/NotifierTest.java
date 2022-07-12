@@ -30,8 +30,8 @@ public class NotifierTest {
                 queue.addNotificationToUser("Mihail Marian", "hello world");
                 queue.addNotificationToUser("Mihail Marian", "how are you");
 
-                Notifier notifier = new Notifier(this.driver, queue);
-                notifier.sendNotifications();
+                Notifier notifier = new Notifier(this.driver);
+                notifier.sendNotifications(queue);
                 driver.close();
         }
 }

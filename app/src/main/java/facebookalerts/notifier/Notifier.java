@@ -8,18 +8,16 @@ import facebookalerts.notificationsqueue.NotificationsQueue;
 
 public class Notifier {
 
-    private NotificationsQueue queue;
     private BrowserDriver browserDriver;
 
-    public Notifier(BrowserDriver driver, NotificationsQueue queue) {
+    public Notifier(BrowserDriver driver) {
         this.browserDriver = driver;
-        this.queue = queue;
     }
 
-    public void sendNotifications() {
+    public void sendNotifications(NotificationsQueue queue) {
         this.browserDriver.goToWebsite("https://www.messenger.com");
 
-        Iterator<String> usersIterator = this.queue.getAllUsers().iterator();
+        Iterator<String> usersIterator = queue.getAllUsers().iterator();
 
         while (usersIterator.hasNext()) {
             String user = usersIterator.next();
@@ -28,7 +26,7 @@ public class Notifier {
 
             this.browserDriver.findElementByCssSelector("[aria-label=\"Message\"]").click();
 
-            List<String> posts = this.queue.getNotificationsForUser(user);
+            List<String> posts = queue.getNotificationsForUser(user);
             String message = String.join(" | ", posts);
             this.browserDriver.findElementByCssSelector("[aria-label=\"Message\"]").sendKeys(message);
 

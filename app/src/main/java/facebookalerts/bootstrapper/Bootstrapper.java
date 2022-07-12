@@ -12,16 +12,23 @@ import facebookalerts.records.FacebookGroupRecord;
 import facebookalerts.scraper.Scraper;
 
 public class Bootstrapper {
-    protected BrowserDriver browserDriver = new BrowserDriver();
-    protected FacebookGroupsDatastore datastore = new FacebookGroupsDatastore();
-    protected NotificationsQueue queue = new NotificationsQueue();
+    private Scraper scraper;
+    private FacebookGroupsDatastore datastore;
+    private Notifier notifier;
+    private BrowserDriver browserDriver;
+
+    public Bootstrapper(Scraper scraper, FacebookGroupsDatastore datastore, Notifier notifier,
+            BrowserDriver browserDriver) {
+        this.scraper = scraper;
+        this.datastore = datastore;
+        this.notifier = notifier;
+        this.browserDriver = browserDriver;
+    }
 
     public void run() throws FileNotFoundException, ClassNotFoundException, IOException, InterruptedException {
         List<FacebookGroupRecord> facebookGroups = this.datastore.getAllFacebookGroups();
 
-        this.browserDriver.start();
-
-        Scraper scraper = new Scraper(this.browserDriver);
+        NotificationsQueue notificationsQueue = new NotificationsQueue();
 
         for (FacebookGroupRecord group : facebookGroups) {
 
@@ -30,12 +37,10 @@ public class Bootstrapper {
 
             List<String> posts = scraper.getAllPostsForGroup();
 
-            this.queue.findRelevantPostsAndAddToNotificationsQueue(posts,
+            notificationsQueue.findRelevantPostsAndAddToNotificationsQueue(posts,
                     group.keywords());
         }
 
-        Notifier notifier = new Notifier(this.browserDriver, this.queue);
-        notifier.sendNotifications();
-        this.browserDriver.close();
+        this.notifier.sendNotifications(notificationsQueue);
     }
 }
