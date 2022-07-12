@@ -14,7 +14,7 @@ public class Notifier {
         this.browserDriver = driver;
     }
 
-    public void sendNotifications(NotificationsQueue queue) {
+    public void sendNotifications(NotificationsQueue queue) throws InterruptedException {
         this.browserDriver.goToWebsite("https://www.messenger.com");
 
         Iterator<String> usersIterator = queue.getAllUsers().iterator();
@@ -23,12 +23,16 @@ public class Notifier {
             String user = usersIterator.next();
             this.browserDriver.findElementByCssSelector("[aria-label=\"Search Messenger\"]").sendKeys(user);
             this.browserDriver.findElementByCssSelector("li[role=\"option\"]:nth-of-type(2)").click();
+            Thread.sleep(1000);
 
             this.browserDriver.findElementByCssSelector("[aria-label=\"Message\"]").click();
+            Thread.sleep(1000);
 
             List<String> posts = queue.getNotificationsForUser(user);
             String message = String.join(" | ", posts);
             this.browserDriver.findElementByCssSelector("[aria-label=\"Message\"]").sendKeys(message);
+
+            Thread.sleep(1000);
 
             this.browserDriver.findElementByCssSelector("[aria-label=\"Press enter to send\"]").click();
         }

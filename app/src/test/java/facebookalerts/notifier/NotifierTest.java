@@ -25,7 +25,7 @@ public class NotifierTest {
         }
 
         @Test
-        public void testSendNotifications() {
+        public void testSendNotifications() throws InterruptedException {
                 NotificationsQueue queue = new NotificationsQueue();
                 queue.addNotificationToUser("Mihail Marian", "hello world");
                 queue.addNotificationToUser("Mihail Marian", "how are you");
