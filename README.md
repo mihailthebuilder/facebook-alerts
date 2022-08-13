@@ -19,6 +19,3 @@ Run the project
 ## TODO
 
 - notify users of posts
-- how to run this
-
-## Log
